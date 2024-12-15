@@ -1,0 +1,5 @@
+services:
+  app:
+    image: my-example-image
+    ports:
+      - "8080:8080"
