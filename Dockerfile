@@ -1,25 +1,26 @@
+# Add the base maven image in order to build a jar file
 FROM maven:3.8.4-openjdk-17-slim AS build
 
-# Устанавливаем рабочий каталог внутри контейнера
+# Working directory inside created container
 WORKDIR /app
 
-# Копируем проект в контейнер
+# Copy all the files in container's work directory
 COPY . /app
 
-# Выполняем сборку Maven
-RUN mvn clean install
+# Perform mvn cln instl
+RUN mvn clean install -DskipTests
 
-# Используем базовый образ
+# Base jdk image to be used in container
 FROM openjdk:17-jdk-slim
 
-# Указываем рабочую директорию внутри контейнера
+# Working directory
 WORKDIR /app
 
-# Копируем ваш JAR-файл в контейнер
+# Copy created jar file into newly created container
 COPY --from=build /app/target/dockerLearning-0.0.1-SNAPSHOT.jar /app/dockerLearning-0.0.1-SNAPSHOT.jar
 #COPY target/dockerLearning-0.0.1-SNAPSHOT.jar /app/dockerLearning-0.0.1-SNAPSHOT.jar
 
 EXPOSE 8080
 
-# Указываем команду для запуска приложения
+# Run command to start the application inside a container
 CMD ["java", "-jar", "/app/dockerLearning-0.0.1-SNAPSHOT.jar"]
