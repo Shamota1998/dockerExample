@@ -1,5 +1,9 @@
+version: '3.8'
 services:
   app:
     image: my-example-image
+    build: .
     ports:
-      - "8080:8080"
+      - "8080:8080"  # Проброс порта 8080 на хосте на порт 8080 внутри контейнера
+    networks:
+      - default
