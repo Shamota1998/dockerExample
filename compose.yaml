@@ -7,3 +7,5 @@ services:
       - "8080:8080"  # Проброс порта 8080 на хосте на порт 8080 внутри контейнера
     networks:
       - default
+    volumes:
+      - ./src/main/java/persist:/app/data

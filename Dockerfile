@@ -22,5 +22,7 @@ COPY --from=build /app/target/dockerLearning-0.0.1-SNAPSHOT.jar /app/dockerLearn
 
 EXPOSE 8080
 
+VOLUME ["/app/data"]
+
 # Run command to start the application inside a container
 CMD ["java", "-jar", "/app/dockerLearning-0.0.1-SNAPSHOT.jar"]
